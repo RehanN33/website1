@@ -435,13 +435,13 @@
 
 
         // 3. LOGIKA KONEKSI GOOGLE SHEETS UNTUK SISA SLOT
-        const GOOGLE_SHEET_CSV_URL = "SALIN_URL_CSV_KAMU_DISINI";
+        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1HA6gDo8tUG7oZPwODcjWj3khghbdjJLtK-U_Sc55LPo/export?format=csv";
 
         function fetchLiveSlots() {
             const slotElement = document.getElementById('slots-left');
             if (!slotElement) return;
 
-            if (GOOGLE_SHEET_CSV_URL === "SALIN_URL_CSV_KAMU_DISINI") {
+            if (GOOGLE_SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/1HA6gDo8tUG7oZPwODcjWj3khghbdjJLtK-U_Sc55LPo/export?format=csv") {
                 const day = new Date().getDay();
                 let simulatedSlots = 10;
                 if (day === 1) simulatedSlots = 9;
