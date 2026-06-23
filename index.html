@@ -36,7 +36,7 @@
         </div>
 
         <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Laporan PKL Numpuk & Dadline Dekat? <br>
+            Laporan PKL Numpuk & Deadline Dekat? <br>
             <span class="text-blue-600">Biar Kami Yang Bereskan!</span>
         </h1>
         <p class="mt-6 text-base md:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
@@ -445,22 +445,31 @@
 
 
         // 3. LOGIKA KONEKSI GOOGLE SHEETS UNTUK SISA SLOT
-        async function loadSlots() {
-    try {
-        const response = await fetch('./slots.json?t=' + Date.now());
-        const data = await response.json();
+     <script>
+const GOOGLE_SHEET_CSV_URL =
+"https://docs.google.com/spreadsheets/d/1HA6gDo8tUG7oZPwODcjWj3khghbdjJLtK-U_Sc55LPo/export?format=csv&gid=0";
 
-        document.getElementById('slots-left').textContent = data.slots;
+async function fetchLiveSlots() {
+    const slotElement = document.getElementById('slots-left');
+    if (!slotElement) return;
+
+    try {
+        const response = await fetch(GOOGLE_SHEET_CSV_URL);
+        const data = await response.text();
+
+        const slot = data.trim();
+
+        if (!isNaN(slot) && slot !== "") {
+            slotElement.textContent = slot;
+        }
     } catch (error) {
-        console.error('Gagal memuat slot:', error);
+        console.error("Gagal memuat slot:", error);
     }
 }
 
-loadSlots();
-setInterval(loadSlots, 10000);
-        fetchLiveSlots();
-
-
+fetchLiveSlots();
+setInterval(fetchLiveSlots, 30000);
+</script>
         // 4. KALKULATOR ESTIMASI BIAYA INTERAKTIF
         const layananEl = document.getElementById('calc-layanan');
         const waktuEl = document.getElementById('calc-waktu');
