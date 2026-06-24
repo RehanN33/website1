@@ -22,7 +22,7 @@
             </div>
             <!-- TRACKED WA BUTTON 1 -->
             <a href="https://wa.me/6283898839679" target="_blank" class="wa-track-btn bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition shadow-sm text-sm">
-                Hubungi 
+                Hubungi Kami
             </a>
         </div>
     </nav>
@@ -435,32 +435,26 @@
 
 
         // 3. LOGIKA KONEKSI GOOGLE SHEETS UNTUK SISA SLOT
-const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgQGgetxt6mvmGTNFgdC33t624bGQQkYi2hbg233FKTnGQIgCjgBngPEUOfkCIYT0UQ63oI7h3IicO/pub?gid=0&single=true&output=csv";
+// GANTI DENGAN URL WEB APP MILIKMU (Hasil Deployment Apps Script)
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGO17Y5K-ZtMKodpavMLYZtfSy_tvMXzmzhxXmq34Sv0WZxFFs-8uF840QlnbSizXJrw/exec";
 
 function fetchLiveSlots() {
     const slotElement = document.getElementById('slots-left');
     if (!slotElement) return;
 
-    // Tambahkan timestamp agar browser tidak mengambil data lama dari cache
-    const urlWithCacheBuster = GOOGLE_SHEET_CSV_URL + "&t=" + new Date().getTime();
-
-    fetch(urlWithCacheBuster)
+    fetch(GOOGLE_SCRIPT_URL + "?t=" + new Date().getTime())
         .then(response => response.text())
         .then(data => {
-            // CSV dari Google Sheets biasanya berisi header (jika sheet bukan cell tunggal)
-            // Jika cell A1 kamu hanya berisi satu angka, data.trim() sudah cukup.
-            const cleanValue = data.trim(); 
-            
-            if (cleanValue !== "") {
-                slotElement.textContent = cleanValue;
-            }
+            // Data dari Apps Script biasanya langsung berupa angka bersih
+            slotElement.textContent = data.trim();
         })
-        .catch(error => console.error("Gagal memuat data slot harian:", error));
+        .catch(error => {
+            console.error("Gagal update slot:", error);
+        });
 }
 
+// Jalankan saat halaman dimuat
 fetchLiveSlots();
-
-
         // 4. KALKULATOR ESTIMASI BIAYA INTERAKTIF
         const layananEl = document.getElementById('calc-layanan');
         const waktuEl = document.getElementById('calc-waktu');
