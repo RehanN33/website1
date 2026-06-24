@@ -435,27 +435,30 @@
 
 
         // 3. LOGIKA KONEKSI GOOGLE SHEETS UNTUK SISA SLOT
-<script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGO17Y5K-ZtMKodpavMLYZtfSy_tvMXzmzhxXmq34Sv0WZxFFs-8uF840QlnbSizXJrw/exec";
+// GANTI DENGAN URL WEB APP MILIKMU (Hasil Deployment Apps Script)
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGO17Y5K-ZtMKodpavMLYZtfSy_tvMXzmzhxXmq34Sv0WZxFFs-8uF840QlnbSizXJrw/exec";
 
-    function fetchLiveSlots() {
-        const slotElement = document.getElementById('slots-left');
-        if (!slotElement) return;
+function fetchLiveSlots() {
+    const slotElement = document.getElementById('slots-left');
+    if (!slotElement) return;
 
-        fetch(GOOGLE_SCRIPT_URL + "?t=" + new Date().getTime())
-            .then(response => response.text())
-            .then(data => {
-                slotElement.textContent = data.trim();
-            })
-            .catch(error => console.error("Gagal update slot:", error));
-    }
+    fetch(GOOGLE_SCRIPT_URL + "?t=" + new Date().getTime())
+        .then(response => response.text())
+        .then(data => {
+            // Data dari Apps Script biasanya langsung berupa angka bersih
+            slotElement.textContent = data.trim();
+        })
+        .catch(error => {
+            console.error("Gagal update slot:", error);
+        });
+}
 
-    // 1. Panggil pertama kali saat web dibuka
-    fetchLiveSlots();
+// Jalankan saat halaman dimuat
+fetchLiveSlots();
     
     // 2. Lakukan pengecekan ulang setiap 5 detik
     setInterval(fetchLiveSlots, 5000); 
-</script>
+        
         // 4. KALKULATOR ESTIMASI BIAYA INTERAKTIF
         const layananEl = document.getElementById('calc-layanan');
         const waktuEl = document.getElementById('calc-waktu');
