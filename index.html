@@ -22,7 +22,7 @@
             </div>
             <!-- TRACKED WA BUTTON 1 -->
             <a href="https://wa.me/6283898839679" target="_blank" class="wa-track-btn bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition shadow-sm text-sm">
-                Hubungi Kita
+                Hubungi s
             </a>
         </div>
     </nav>
@@ -435,13 +435,13 @@
 
 
         // 3. LOGIKA KONEKSI GOOGLE SHEETS UNTUK SISA SLOT
-        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1HA6gDo8tUG7oZPwODcjWj3khghbdjJLtK-U_Sc55LPo/export?format=csv";
+        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgQGgetxt6mvmGTNFgdC33t624bGQQkYi2hbg233FKTnGQIgCjgBngPEUOfkCIYT0UQ63oI7h3IicO/pub?gid=0&single=true&output=csv";
 
         function fetchLiveSlots() {
             const slotElement = document.getElementById('slots-left');
             if (!slotElement) return;
 
-            if (GOOGLE_SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/1HA6gDo8tUG7oZPwODcjWj3khghbdjJLtK-U_Sc55LPo/export?format=csv") {
+            if (GOOGLE_SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgQGgetxt6mvmGTNFgdC33t624bGQQkYi2hbg233FKTnGQIgCjgBngPEUOfkCIYT0UQ63oI7h3IicO/pub?gid=0&single=true&output=csv") {
                 const day = new Date().getDay();
                 let simulatedSlots = 10;
                 if (day === 1) simulatedSlots = 9;
